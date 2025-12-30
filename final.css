@@ -1,0 +1,54 @@
+body{
+  height:100vh;
+  background:radial-gradient(circle,#ff9a9e,#ff1493);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  font-family:'Comic Sans MS',cursive;
+}
+
+/* heartbeat glow */
+.heart-glow{
+  position:absolute;
+  width:300px;
+  height:300px;
+  background:rgba(255,20,147,.3);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.2);opacity:.5}
+}
+
+/* floating roses */
+.roses::before{
+  content:"🌹 🌹 🌹 🌹 🌹";
+  position:absolute;
+  width:100%;
+  text-align:center;
+  top:-10%;
+  animation:fall 6s infinite linear;
+}
+
+@keyframes fall{
+  to{top:110%}
+}
+
+.final-box{
+  background:white;
+  padding:40px;
+  border-radius:30px;
+  text-align:center;
+  z-index:2;
+}
+
+button{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff1493;
+  color:white;
+  margin:10px;
+}

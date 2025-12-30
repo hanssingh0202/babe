@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>A Little Note for You, My Love!</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-url: url("./background.jpg");
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-image:
+      linear-gradient(180deg, rgba(255,229,236,0.85), rgba(255,179,217,0.75)),
+      var(--bg-url);
+    background-size: cover, cover;
+    background-position: center, center;
+    overflow:hidden;
+    position:relative;
+  }
+
+  body.fade-out{
+    transition:opacity .45s ease, transform .45s ease;
+    opacity:0;
+    transform:scale(.98) translateY(-8px);
+  }
+
+  .background-elements{position:fixed;inset:0;pointer-events:none;z-index:1}
+  .cloud{position:absolute;background:rgba(255,255,255,0.6);border-radius:100px;animation:float 20s infinite ease-in-out;z-index:2}
+  .cloud:before,.cloud:after{content:'';position:absolute;background:rgba(255,255,255,0.6);border-radius:100px}
+  .cloud-1{width:120px;height:44px;top:8%;left:6%}
+  .cloud-1:before{width:56px;height:44px;top:-20px;left:10px}
+  .cloud-1:after{width:66px;height:32px;top:-10px;right:10px}
+  .cloud-2{width:150px;height:58px;top:62%;right:5%}
+  .cloud-2:before{width:76px;height:58px;top:-26px;left:16px}
+  .cloud-2:after{width:86px;height:42px;top:-14px;right:16px}
+  .cloud-3{width:96px;height:40px;bottom:12%;left:5%}
+  .cloud-3:before{width:48px;height:40px;top:-16px;left:10px}
+  .cloud-3:after{width:58px;height:28px;top:-10px;right:10px}
+
+  @keyframes float{
+    0%,100%{transform:translateY(0) translateX(0)}
+    25%{transform:translateY(-16px) translateX(8px)}
+    50%{transform:translateY(-8px) translateX(-8px)}
+    75%{transform:translateY(-12px) translateX(4px)}
+  }
+  .star{position:absolute;width:3px;height:3px;background:#FFD700;border-radius:50%;animation:twinkle 3s infinite;z-index:2}
+  @keyframes twinkle{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+
+  .container{
+    position:relative;z-index:10;width:95%;max-width:960px;padding:32px;animation:fadeIn .8s ease-out;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+  .card{
+    position:relative;
+    background:rgba(255,255,255,0.96);
+    border-radius:20px;
+    padding:48px 40px;
+    box-shadow:0 20px 50px rgba(255,105,180,0.22);
+    text-align:center;
+  }
+
+  .sticker{
+    position:absolute;
+    top:-44px;
+    right:-36px;
+    width:96px;
+    height:auto;
+    object-fit:contain;
+    transform:rotate(-6deg);
+    filter:drop-shadow(0 6px 14px rgba(0,0,0,0.18));
+    z-index:3;
+    pointer-events:none;
+  }
+
+  .sticker-left{
+    left:-36px;
+    right:auto;
+    top:auto;
+    bottom:-44px;
+    transform:rotate(6deg);
+  }
+
+  .header{
+    color:#1f122b;
+    font-size:2.3rem;
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  .eyebrow{
+    font-weight:600;
+    color:#a06; 
+    font-size:.95rem;
+    margin-bottom:8px;
+  }
+  .message{
+    color:#5D4672;
+    font-size:1.05rem;
+    line-height:1.7;
+    margin:0 auto 28px auto;
+    max-width:56ch;
+    font-weight:300;
+  }
+
+  .link-like{
+    display:inline-block;
+    margin-bottom:16px;
+    color:#ff2d88;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+
+  .button-group{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+  .btn{
+    padding:14px 32px;
+    border:none;
+    border-radius:999px;
+    font-family:'Poppins',sans-serif;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .25s ease;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,#FF69B4 0%,#FF1493 100%);
+    color:#fff
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 14px 30px rgba(255,105,180,0.28)
+  }
+  .btn-secondary{
+    background:linear-gradient(135deg,#DDA0DD 0%,#BA55D3 100%);
+    color:#fff
+  }
+  .btn-secondary:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 14px 30px rgba(186,85,211,0.24)
+  }
+
+  .footer{
+    margin-top:20px;
+    color:#FF69B4;
+    font-size:1rem;
+    font-weight:600
+  }
+
+  .heart{
+    position:fixed;
+    font-size:30px;
+    animation:floatHeart 3s ease-in forwards;
+    pointer-events:none;
+    z-index:1000
+  }
+  @keyframes floatHeart{
+    0%{opacity:1;transform:translateY(0) scale(0)}
+    50%{opacity:1;transform:translateY(-200px) scale(1)}
+    100%{opacity:0;transform:translateY(-400px) scale(.5)}
+  }
+  .confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    pointer-events:none;
+    z-index:1000;
+    animation:confettiFall 3s ease-in forwards
+  }
+  @keyframes confettiFall{
+    0%{opacity:1;transform:translateY(0) rotate(0deg)}
+    100%{opacity:0;transform:translateY(100vh) rotate(720deg)}
+  }
+
+  /* ==== MOBILE: same layout, left PNG hidden ==== */
+  @media (max-width: 600px){
+
+    html, body{
+      overflow-x:hidden;
+    }
+
+    .container{
+      width:100%;
+      max-width:440px;
+      padding:16px;
+      margin:0 auto;
+    }
+
+    .card{
+      padding:32px 22px;
+      border-radius:18px;
+      box-shadow:0 14px 36px rgba(255,105,180,0.2);
+    }
+
+    .eyebrow{
+      font-size:.9rem;
+      margin-bottom:6px;
+    }
+
+    .header{
+      font-size:1.8rem;
+      line-height:1.2;
+      margin-bottom:12px;
+    }
+
+    .message{
+      font-size:.96rem;
+      line-height:1.6;
+      margin-bottom:20px;
+      max-width:50ch;
+    }
+
+    .btn{
+      padding:12px 24px;
+      font-size:.95rem;
+    }
+
+    .sticker{
+      top:-30px;
+      right:-18px;
+      width:72px;
+      transform:rotate(-5deg);
+    }
+
+    /* hide left PNG on mobile */
+    .sticker-left{
+      display:none;
+    }
+
+    .cloud{opacity:.4;}
+    .star{opacity:.5;}
+  }
+
+</style>
+</head>
+<body>
+  <div class="background-elements">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <!-- stars via JS -->
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <img class="sticker" src="./pic2.png" alt="sticker" />
+      <img class="sticker sticker-left" src="./pic1.png" alt="sticker-left" />
+
+      <div class="eyebrow">I Love You Very Much Mera Bacha 💞</div>
+      <h1 class="header">Daddy Loves You💋💋💋💋</h1>
+
+      <p class="message">
+       Meri Pyaari khushi tumko m ky batau ye saal ky tha tumhari pehli jhalak dekhi maine wo din bhi ky din tha sona like tum bhuuut
+       sweet toh ho but tumko pta h tumhari haar cheez haar saal bhuuuut khubsurat hoti jaa rhi h sona or mera pyaar tumhar liye badhta he jaa raha h
+       sona i love you very much mera sona bachaaa Bhagwan jii hum dono ko hamesha sth rakhe bachaaa jii  I love you very very much <br><br>
+        
+      </p>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="playVoiceMessage()">Dil Ki Awaaz🎵</button>
+      </div>
+
+      <div class="footer">Mera Bachaa 💋💋💋💋</div>
+    </div>
+  </div>
+<audio id="voiceMessage" src="Rev.mp3"></audio>
+
+<script>
+function playVoiceMessage() {
+  const audio = document.getElementById("voiceMessage");
+  audio.play();
+}
+</script>
+
+<script>
+  (function createStars(){
+    const container=document.querySelector('.background-elements');
+    for(let i=0;i<30;i++){
+      const s=document.createElement('div');
+      s.className='star';
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.animationDelay=Math.random()*3+'s';
+      container.appendChild(s);
+    }
+  })();
+
+  function createHearts(){
+    const colors=['💖','💗','💕','💓','💝'];
+    for(let i=0;i<15;i++){
+      setTimeout(()=>{
+        const heart=document.createElement('div');
+        heart.className='heart';
+        heart.textContent=colors[Math.floor(Math.random()*colors.length)];
+        heart.style.left=Math.random()*window.innerWidth+'px';
+        heart.style.top=window.innerHeight+'px';
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
+      },i*90);
+    }
+    const confettiColors=['#FFB3D9','#FF69B4','#DDA0DD','#FFD700','#FFC9DE'];
+    for(let i=0;i<50;i++){
+      setTimeout(()=>{
+        const c=document.createElement('div');
+        c.className='confetti';
+        c.style.left=Math.random()*window.innerWidth+'px';
+        c.style.top='-20px';
+        c.style.backgroundColor=confettiColors[Math.floor(Math.random()*confettiColors.length)];
+        c.style.borderRadius=Math.random()>0.5?'50%':'0';
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+      },i*35);
+    }
+  }
+
+  function begin(){
+    createHearts();
+
+    const btn = document.getElementById('beginBtn');
+    if(btn){ btn.disabled = true; btn.style.opacity = '0.9'; }
+
+    document.body.classList.add('fade-out');
+
+    setTimeout(()=>{
+      window.location.href = 'memory.html';
+    }, 480);
+  }
+</script>
+
+<!-- live-server script (optional, can remove in production) -->
+<script>
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+</script>
+</body>
+</html>

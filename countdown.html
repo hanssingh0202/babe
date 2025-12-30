@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year My Love</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Global Music Player -->
+<script src="music-player.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ================= BODY ================= */
+body{
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(180deg,#0a0a23,#1a1a3a);
+    position:relative;
+}
+
+/* ================= FIREWORKS CANVAS ================= */
+.fireworks-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+}
+
+#fireworksCanvas{
+    width:100%;
+    height:100%;
+}
+
+/* ================= FLOATING ICONS ================= */
+.svg-icon{
+    position:absolute;
+    width:42px;
+    height:42px;
+    opacity:0.6;
+    fill:#FFD700;
+    animation:float 10s infinite ease-in-out;
+}
+
+.svg-icon.star{
+    fill:#FFD700; /* Golden stars for New Year */
+}
+.svg-icon.heart{
+    fill:#FF6B6B; /* Red hearts for love */
+}
+
+@keyframes float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-22px); }
+}
+
+/* ================= LOADING SCREEN ================= */
+.loading-screen{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(180deg,#0a0a23,#1a1a3a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    transition:.8s ease;
+}
+
+.loading-screen.hidden{
+    opacity:0;
+    pointer-events:none;
+}
+
+.loading-wrapper{
+    text-align:center;
+    width:280px;
+    position:relative;
+}
+
+.loading-text{
+    font-family:'Dancing Script',cursive;
+    font-size:2.6rem;
+    color:#FFD700;
+    margin-bottom:25px;
+    text-shadow:0 0 20px #FFD700;
+}
+
+/* LOADING BAR */
+.kitty-bar{
+    position:relative;
+    width:100%;
+    height:14px;
+    background:rgba(255,255,255,0.1);
+    border-radius:50px;
+    margin:50px 0;
+}
+
+.kitty-progress{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#FFD700,#FF6B6B);
+    border-radius:50px;
+    box-shadow:0 0 20px #FFD700;
+}
+
+.kitty{
+    position:absolute;
+    top:-30px;
+    left:0%;
+    width:70px;
+    height:70px;
+    object-fit:contain;
+}
+
+.loading-percent{
+    font-size:1.2rem;
+    color:#FFD700;
+    font-weight:600;
+    text-shadow:0 0 10px #FFD700;
+}
+
+/* ================= MAIN CONTENT ================= */
+.main-content{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    position:relative;
+}
+
+/* ================= GIF CONTAINER ================= */
+.gif-container{
+    position:absolute;
+    top:20px;
+    right:10px;
+    z-index:3;
+}
+
+.christmas-gif{
+    width:120px;
+    height:120px;
+    border-radius:15px;
+    
+    object-fit:cover;
+}
+
+/* ================= CARD ================= */
+.wish-container{
+    background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(15px);
+    border:2px solid rgba(255,215,0,0.4);
+    border-radius:24px;
+    padding:25px 20px;
+    max-width:280px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,.6),
+               0 0 25px rgba(255,215,0,0.3);
+    z-index:2;
+}
+
+/* ================= TEXT ================= */
+.main-title{
+    font-family:'Kaushan Script',cursive;
+    font-size:1.8rem;
+    color:#FFD700;
+    text-shadow:0 0 20px #FFD700;
+    animation:glow 2s ease-in-out infinite alternate;
+    margin-bottom:8px;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 20px #FFD700; }
+    to{ text-shadow:0 0 30px #FFD700, 0 0 40px #FFD700; }
+}
+
+.subtitle{
+    font-family:'Dancing Script',cursive;
+    font-size:1.2rem;
+    color:#FFFFFF;
+    margin:8px 0 15px;
+    text-shadow:0 0 10px rgba(255,255,255,0.8);
+}
+
+.message{
+    font-size:.95rem;
+    line-height:1.65;
+    color:#E0E0E0;
+    margin-bottom:15px;
+    text-shadow:0 0 5px rgba(255,255,255,0.5);
+}
+
+.signature{
+    font-family:'Dancing Script',cursive;
+    font-size:1.35rem;
+    color:#FFD700;
+    margin-top:20px;
+    text-shadow:0 0 15px #FFD700;
+}
+
+/* ================= BUTTON ================= */
+.next-btn{
+    margin-top:20px;
+    padding:10px 25px;
+    border:2px solid #FFD700;
+    border-radius:25px;
+    background:linear-gradient(45deg,#FFD700,#FF6B6B);
+    color:#000000;
+    font-size:0.9rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 10px 20px rgba(255,215,0,.4);
+    text-shadow:none;
+}
+
+.next-btn:hover{
+    transform:translateY(-2px) scale(1.05);
+    background:linear-gradient(45deg,#FFED4E,#FF8080);
+    box-shadow:0 15px 25px rgba(255,215,0,.6),
+               0 0 25px rgba(255,215,0,0.8);
+}
+
+
+/* ================= MOBILE ================= */
+@media(max-width:380px){
+    .main-title{font-size:2rem;}
+    .subtitle{font-size:1.3rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOADING ================= -->
+<div class="loading-screen" id="loadingScreen">
+
+    <svg class="svg-icon heart" style="top:15%;left:15%" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+        2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+        C13.09 3.81 14.76 3 16.5 3
+        19.58 3 22 5.42 22 8.5
+        c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+
+    <svg class="svg-icon star" style="bottom:20%;right:20%" viewBox="0 0 24 24">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24
+        l-7.19-.61L12 2 9.19 8.63 2 9.24
+        l5.46 4.73L5.82 21z"/>
+    </svg>
+
+    <div class="loading-wrapper">
+        <div class="loading-text">Loading Magic...</div>
+
+        <div class="kitty-bar">
+            <div class="kitty-progress" id="progress"></div>
+            <img src="./gif2.gif" class="kitty" id="kitty">
+        </div>
+
+        <div class="loading-percent" id="percent">0%</div>
+    </div>
+</div>
+
+<!-- ================= FIREWORKS ================= -->
+<div class="fireworks-container">
+    <canvas id="fireworksCanvas"></canvas>
+</div>
+
+<!-- ================= MAIN PAGE ================= -->
+<div class="main-content">
+
+    <!-- GIF Container at top right -->
+    <div class="gif-container">
+        <img src="./icon.gif" alt="Christmas GIF" class="christmas-gif">
+    </div>
+
+    <svg class="svg-icon heart" style="top:10%;left:10%" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+        2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+        C13.09 3.81 14.76 3 16.5 3
+        19.58 3 22 5.42 22 8.5
+        c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+
+    <svg class="svg-icon star" style="top:15%;right:10%" viewBox="0 0 24 24">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24
+        l-7.19-.61L12 2 9.19 8.63 2 9.24
+        l5.46 4.73L5.82 21z"/>
+    </svg>
+
+    <div class="wish-container">
+        <h1 class="main-title">Welcome to 2026</h1>
+        <h2 class="subtitle">Happy New Year! 🎆</h2>
+        <button class="next-btn">Next Surprise →</button>
+    </div>
+</div>
+
+<script>
+// ================= LOADING ANIMATION =================
+let percent = 0;
+const progress = document.getElementById("progress");
+const kitty = document.getElementById("kitty");
+const percentText = document.getElementById("percent");
+const loadingScreen = document.getElementById("loadingScreen");
+
+const interval = setInterval(()=>{
+    percent++;
+    progress.style.width = percent + "%";
+    kitty.style.left = `calc(${percent}% - 35px)`;
+    percentText.innerText = percent + "%";
+
+    if(percent >= 100){
+        clearInterval(interval);
+        setTimeout(()=>{
+            loadingScreen.classList.add("hidden");
+            setTimeout(()=>{
+                loadingScreen.remove();
+                startFireworks(); // Start fireworks after loading
+            }, 800);
+        },500);
+    }
+}, 30);
+
+// ================= FIREWORKS ANIMATION =================
+class Firework {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.ctx;
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height;
+        this.targetY = Math.random() * canvas.height * 0.5;
+        this.speed = 3 + Math.random() * 3;
+        this.particles = [];
+        this.exploded = false;
+        this.colors = [
+            '#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', 
+            '#96CEB4', '#FECA57', '#FF9FF3', '#54A0FF',
+            '#5F27CD', '#00D2D3', '#FF9F43', '#10AC84'
+        ];
+        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+    }
+
+    update() {
+        if (!this.exploded) {
+            this.y -= this.speed;
+            if (this.y <= this.targetY) {
+                this.explode();
+            }
+        } else {
+            this.updateParticles();
+        }
+    }
+
+    explode() {
+        this.exploded = true;
+        const particleCount = 25 + Math.random() * 25;
+        
+        for (let i = 0; i < particleCount; i++) {
+            this.particles.push({
+                x: this.x,
+                y: this.y,
+                vx: (Math.random() - 0.5) * 8,
+                vy: (Math.random() - 0.5) * 8,
+                life: 1.0,
+                decay: 0.005 + Math.random() * 0.01,
+                color: this.colors[Math.floor(Math.random() * this.colors.length)],
+                size: 2 + Math.random() * 3
+            });
+        }
+    }
+
+    updateParticles() {
+        this.particles = this.particles.filter(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vy += 0.1; // gravity
+            particle.vx *= 0.99; // air resistance
+            particle.life -= particle.decay;
+            return particle.life > 0;
+        });
+    }
+
+    draw() {
+        if (!this.exploded) {
+            // Draw rocket
+            this.ctx.save();
+            this.ctx.globalAlpha = 0.8;
+            this.ctx.fillStyle = this.color;
+            this.ctx.shadowBlur = 10;
+            this.ctx.shadowColor = this.color;
+            this.ctx.fillRect(this.x - 2, this.y - 10, 4, 10);
+            this.ctx.restore();
+        } else {
+            // Draw particles
+            this.particles.forEach(particle => {
+                this.ctx.save();
+                this.ctx.globalAlpha = particle.life * 0.8;
+                this.ctx.fillStyle = particle.color;
+                this.ctx.shadowBlur = 15;
+                this.ctx.shadowColor = particle.color;
+                this.ctx.beginPath();
+                this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                this.ctx.fill();
+                this.ctx.restore();
+            });
+        }
+    }
+
+    isDead() {
+        return this.exploded && this.particles.length === 0;
+    }
+}
+
+class FireworkShow {
+    constructor() {
+        this.canvas = document.getElementById('fireworksCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.canvas.ctx = this.ctx;
+        this.fireworks = [];
+        this.running = false;
+        
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+    }
+
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+
+    start() {
+        this.running = true;
+        this.animate();
+        
+        // Create fireworks at intervals
+        setInterval(() => {
+            if (this.running && Math.random() < 0.3) {
+                this.fireworks.push(new Firework(this.canvas));
+            }
+        }, 400);
+
+        // Burst effect every 10 seconds
+        setInterval(() => {
+            if (this.running) {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        this.fireworks.push(new Firework(this.canvas));
+                    }, i * 200);
+                }
+            }
+        }, 10000);
+    }
+
+    animate() {
+        if (!this.running) return;
+
+        this.ctx.fillStyle = 'rgba(10, 10, 35, 0.1)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Update and draw fireworks
+        this.fireworks = this.fireworks.filter(firework => {
+            firework.update();
+            firework.draw();
+            return !firework.isDead();
+        });
+
+        requestAnimationFrame(() => this.animate());
+    }
+
+    stop() {
+        this.running = false;
+    }
+}
+
+// Global firework show instance
+let fireworkShow;
+
+function startFireworks() {
+    fireworkShow = new FireworkShow();
+    fireworkShow.start();
+}
+
+// Next button functionality
+document.querySelector(".next-btn").addEventListener("click", () => {
+    // Add sparkle effect to button
+    const btn = document.querySelector(".next-btn");
+    btn.style.transform = "scale(1.1)";
+    btn.style.boxShadow = "0 0 30px #FFD700";
+    
+    setTimeout(() => {
+        btn.style.transform = "";
+        btn.style.boxShadow = "";
+        // Smooth page transition
+        smoothPageTransition("second.html");
+    }, 200);
+});
+
+// Smooth page transition function
+function smoothPageTransition(targetPage) {
+    // Create overlay for smooth transition
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, #0a0a23, #1a1a3a);
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    `;
+    document.body.appendChild(overlay);
+
+    // Fade out current page
+    setTimeout(() => {
+        overlay.style.opacity = '1';
+    }, 50);
+
+    // Navigate to target page after fade out
+    setTimeout(() => {
+        window.location.href = targetPage;
+    }, 700);
+}
+
+// Add floating stars effect
+function createFloatingStars() {
+    const starsContainer = document.createElement('div');
+    starsContainer.className = 'fixed inset-0 pointer-events-none z-0';
+    document.body.appendChild(starsContainer);
+
+    for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'absolute text-yellow-300 opacity-70 animate-pulse';
+        star.innerHTML = '✨';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.fontSize = (0.5 + Math.random() * 1) + 'rem';
+        starsContainer.appendChild(star);
+    }
+}
+
+// Start floating stars after a delay
+setTimeout(createFloatingStars, 2000);
+</script>
+
+</body>
+</html>

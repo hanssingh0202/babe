@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dark Theme UI Card</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            goldAccent: '#FFD700',
+            newYearRed: '#FF6B6B',
+            cardBg: 'rgba(0,0,0,0.8)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+
+    /* Glassmorphism container */
+    .glass-container {
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(255,215,0,0.3);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6),
+                  0 0 30px rgba(255,215,0,0.2);
+    }
+
+    /* Glow text effects */
+    .glow-text {
+      text-shadow: 0 0 20px #FFD700;
+    }
+
+    .glow-text-white {
+      text-shadow: 0 0 15px rgba(255,255,255,0.8);
+    }
+
+    /* Card glow effects */
+    .card-glow {
+      box-shadow: 0 8px 25px rgba(255,215,0,0.2);
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    /* 3D Flip */
+    .perspective { perspective: 1000px; }
+    .flip-card {
+      transform-style: preserve-3d;
+      transition: transform 0.7s ease;
+    }
+    .flipped { transform: rotateY(180deg); }
+
+    .card-face {
+      backface-visibility: hidden;
+    }
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Page transition */
+    .fade-out {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.6s ease;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center 
+             bg-gradient-to-br from-[#0a0a23] via-[#1a1a3a] to-[#0a0a23]">
+
+  <!-- Main Container -->
+  <div id="page"
+       class="glass-container
+              rounded-[32px] w-[360px] md:w-[420px]
+              p-6
+              relative transition-all duration-500">
+
+    <!-- Header -->
+    <div class="text-center mt-2 mb-6">
+      <h2 class="text-goldAccent font-semibold text-lg glow-text">
+        Every little moment with you<br>became my favorite story 🤍
+      </h2>
+      <p class="text-white text-sm mt-1 glow-text-white">
+        Some chapters I’ll always cherish:
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-2 gap-4">
+
+      <!-- CARD 1 -->
+      <div class="perspective cursor-pointer" onclick="flipCard(this)">
+        <div class="flip-card relative h-36 rounded-2xl">
+
+          <!-- Heart Icon -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20
+                      bg-goldAccent text-black text-sm font-semibold
+                      px-3 py-1 rounded-full shadow-lg">
+            ♥
+          </div>
+
+          <!-- Front -->
+          <div class="card-face absolute inset-0 bg-gradient-to-br from-goldAccent/20 to-newYearRed/20 
+                      rounded-2xl p-4 card-glow backdrop-blur-sm
+                      flex items-center justify-center text-center">
+            <p class="text-sm text-white font-medium">
+              How I started with you — a simple hello 💗
+            </p>
+          </div>
+
+          <!-- Back -->
+          <div class="card-face card-back absolute inset-0 rounded-2xl overflow-hidden">
+            <img src="./pic11.gif" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="perspective cursor-pointer" onclick="flipCard(this)">
+        <div class="flip-card relative h-36 rounded-2xl">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20
+                      bg-goldAccent text-black text-sm font-semibold
+                      px-3 py-1 rounded-full shadow-lg">
+            ♥
+          </div>
+          <div class="card-face absolute inset-0 bg-gradient-to-br from-newYearRed/20 to-goldAccent/20 
+                      rounded-2xl p-4 card-glow backdrop-blur-sm
+                      flex items-center justify-center text-center">
+            <p class="text-sm text-white font-medium">
+              Every year with you feels magical ✨
+            </p>
+          </div>
+          <div class="card-face card-back absolute inset-0 rounded-2xl overflow-hidden">
+            <img src="./pic22.gif" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="perspective cursor-pointer" onclick="flipCard(this)">
+        <div class="flip-card relative h-36 rounded-2xl">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20
+                      bg-goldAccent text-black text-sm font-semibold
+                      px-3 py-1 rounded-full shadow-lg">
+            ♥
+          </div>
+          <div class="card-face absolute inset-0 bg-gradient-to-br from-goldAccent/20 to-newYearRed/20 
+                      rounded-2xl p-4 card-glow backdrop-blur-sm
+                      flex items-center justify-center text-center">
+            <p class="text-sm text-white font-medium">
+              You stayed, even when life wasn’t easy 🤍
+            </p>
+          </div>
+          <div class="card-face card-back absolute inset-0 rounded-2xl overflow-hidden">
+            <img src="./pic33.gif" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="perspective cursor-pointer" onclick="flipCard(this)">
+        <div class="flip-card relative h-36 rounded-2xl">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20
+                      bg-goldAccent text-black text-sm font-semibold
+                      px-3 py-1 rounded-full shadow-lg">
+            ♥
+          </div>
+          <div class="card-face absolute inset-0 bg-gradient-to-br from-newYearRed/20 to-goldAccent/20 
+                      rounded-2xl p-4 card-glow backdrop-blur-sm
+                      flex items-center justify-center text-center">
+            <p class="text-sm text-white font-medium">
+              Loving you became my habit 💞
+            </p>
+          </div>
+          <div class="card-face card-back absolute inset-0 rounded-2xl overflow-hidden">
+            <img src="./pic44.gif" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Next Button -->
+    <div class="mt-6 flex justify-center">
+      <button onclick="goNext()"
+        class="bg-gradient-to-r from-goldAccent to-newYearRed text-black px-6 py-3 
+               rounded-full text-sm font-semibold border-2 border-goldAccent/30
+               transition-all duration-300 hover:scale-105 hover:shadow-xl
+               hover:shadow-goldAccent/50 glow-text">
+        Next Page →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+    function flipCard(card) {
+      card.querySelector('.flip-card').classList.toggle('flipped');
+    }
+
+    function goNext() {
+      const page = document.getElementById('page');
+      page.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = "third.html";
+      }, 600);
+    }
+  </script>
+
+</body>
+</html>

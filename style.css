@@ -1,104 +1,46 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
 body {
-  background: linear-gradient(160deg, #ff9a9e, #fad0c4);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
+  height: 100vh;
+  background: linear-gradient(135deg,#ffb6c1,#ff69b4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Comic Sans MS',cursive;
 }
 
-.love-wrapper {
-  text-align: center;
-  padding: 20px;
-  max-width: 360px;
+.login-container{
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  width:350px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
 
-.title {
-  color: #fff;
-  font-size: 2rem;
-  animation: glow 2s infinite alternate;
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:1px solid pink;
 }
 
-.subtitle {
-  color: #fff;
-  opacity: 0.9;
-  margin-bottom: 15px;
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:30px;
+  background:#ff1493;
+  color:white;
+  font-size:16px;
 }
 
-.photo-slider {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+.emoji{
+  position:absolute;
+  top:10%;
+  font-size:40px;
+  animation:float 4s infinite;
 }
 
-.photo-slider img {
-  width: 120px;
-  height: 160px;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  transition: transform 0.3s;
-}
-
-.photo-slider img:hover {
-  transform: scale(1.05);
-}
-
-.love-text {
-  margin: 15px 0;
-  color: #fff;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-button {
-  background: #fff;
-  color: #ff4d6d;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-#extra-love {
-  margin-top: 15px;
-  color: #fff;
-  font-size: 1.1rem;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 5px #fff; }
-  to { text-shadow: 0 0 18px #ff3366; }
-}
-
-/* Floating hearts */
-.floating-hearts::before {
-  content: "💖 💕 💘 💋 💝 ❤️";
-  position: fixed;
-  bottom: -20px;
-  width: 100%;
-  text-align: center;
-  font-size: 2rem;
-  animation: floatUp 8s linear infinite;
-}
-
-@keyframes floatUp {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-120vh);
-    opacity: 0;
-  }
+@keyframes float{
+  50%{transform:translateY(-30px)}
 }

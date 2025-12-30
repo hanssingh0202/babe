@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Love 💕</title>
+  <link rel="stylesheet" href="love.css">
+</head>
+<body>
+
+
+<div class="floating">❤️ 💖 💕 💞 💋 😘</div>
+
+<h1>Welcome My Love 💑</h1>
+<p class="subtitle">Choose what you want to feel today 💝</p>
+
+<div class="cards">
+
+  <div class="card" onclick="go('wish.html')">
+    <h2>📸</h2>
+    <h3>Kuch dil ki baat</h3>
+    <p>Expressing my feeling about this year</p>
+  </div>
+
+  <div class="card" onclick="go('feelings.html')">
+    <h2>💌</h2>
+    <h3>What I Feel For You</h3>
+    <p>Words from my heart</p>
+  </div>
+
+  <div class="card" onclick="go('lovelevel.html')">
+    <h2>❤️</h2>
+    <h3>How Much I Love You</h3>
+    <p>Infinite & beyond</p>
+  </div>
+
+    <div class="card locked" id="newYearCard">
+    <h2>🎆</h2>
+    <h3>Beginning of the New Year 2026</h3>
+
+    <div class="countdown">
+        <span id="days">--</span>d :
+        <span id="hours">--</span>h :
+        <span id="minutes">--</span>m :
+        <span id="seconds">--</span>s
+    </div>
+
+    <p id="cardStatus">Unlocks at New Year ❤️</p>
+    </div>
+
+</div>
+
+<script>
+function go(page){
+  window.location = page;
+}
+</script>
+
+<script>
+const targetDate = new Date("Jan 1, 2026 00:00:00").getTime();
+
+const card = document.getElementById("newYearCard");
+const statusText = document.getElementById("cardStatus");
+
+const timer = setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    clearInterval(timer);
+
+    document.getElementById("days").innerText = "00";
+    document.getElementById("hours").innerText = "00";
+    document.getElementById("minutes").innerText = "00";
+    document.getElementById("seconds").innerText = "00";
+
+    card.classList.remove("locked");
+    card.classList.add("unlocked");
+
+    statusText.innerText = "Click to Enter ❤️";
+    card.onclick = () => window.location = "countdown.html";
+    return;
+  }
+
+  document.getElementById("days").innerText =
+    Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("hours").innerText =
+    Math.floor((diff / (1000 * 60 * 60)) % 24);
+  document.getElementById("minutes").innerText =
+    Math.floor((diff / (1000 * 60)) % 60);
+  document.getElementById("seconds").innerText =
+    Math.floor((diff / 1000) % 60);
+
+}, 1000);
+</script>
+
+</body>
+</html>
