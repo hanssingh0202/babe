@@ -189,8 +189,52 @@
           </div>
         </div>
       </div>
+  <!-- CARD 5 -->
+  <div class="perspective cursor-pointer" onclick="openVideo()">
+    <div class="relative h-36 rounded-2xl">
+
+      <!-- Badge -->
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20
+                  bg-goldAccent text-black text-sm font-semibold
+                  px-3 py-1 rounded-full shadow-lg">
+        🎆
+      </div>
+
+      <!-- CARD FRONT -->
+      <div class="absolute inset-0 
+                  bg-gradient-to-br from-newYearRed/30 to-goldAccent/30
+                  rounded-2xl p-4 card-glow backdrop-blur-sm
+                  flex items-center justify-center text-center">
+        <p class="text-sm text-white font-semibold">
+          Happy New Year My Love ❤️✨
+        </p>
+      </div>
 
     </div>
+  </div>
+
+
+    </div>
+    <!-- FULLSCREEN VIDEO MODAL -->
+<div id="videoModal"
+     class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center">
+
+  <!-- Close Button -->
+  <button onclick="closeVideo()"
+          class="absolute top-4 right-4 text-white text-3xl z-50">
+    ✖
+  </button>
+
+  <!-- Video -->
+  <video id="loveVideo"
+         class="w-full h-full object-contain"
+         controls
+         playsinline>
+    <source src="./newyear.mp4" type="video/mp4">
+  </video>
+
+</div>
+
 
     <!-- Next Button -->
     <div class="mt-6 flex justify-center">
@@ -219,6 +263,37 @@
       }, 600);
     }
   </script>
+<script>
+function openVideo() {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("loveVideo");
 
+  modal.classList.remove("hidden");
+
+  video.muted = false;      // ENABLE SOUND
+  video.currentTime = 0;
+  video.play();
+
+  // Force fullscreen on mobile
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitEnterFullscreen) {
+    video.webkitEnterFullscreen(); // iOS
+  }
+}
+
+function closeVideo() {
+  const modal = document.getElementById("videoModal");
+  const video = document.getElementById("loveVideo");
+
+  video.pause();
+  video.currentTime = 0;
+  modal.classList.add("hidden");
+
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+}
+</script>
 </body>
 </html>
