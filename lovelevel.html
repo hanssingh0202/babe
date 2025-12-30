@@ -1,12 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Love Level ❤️</title>
-  <link rel="stylesheet" href="lovelevel.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>My Love Level ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  min-height:100vh;
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle at top,#ff9a9e,#ff1493);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* floating hearts */
+.hearts{
+  position:absolute;
+  top:-10%;
+  width:100%;
+  font-size:28px;
+  animation:fall 7s infinite linear;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  to{ top:110%; }
+}
+
+/* main box */
+.box{
+  background:rgba(255,255,255,0.96);
+  padding:40px 34px;
+  border-radius:30px;
+  width:90%;
+  max-width:420px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.3);
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.95) translateY(10px)}
+  to{opacity:1;transform:none}
+}
+
+h1{
+  color:#ff1493;
+  font-size:30px;
+  margin-bottom:20px;
+}
+
+/* love meter */
+.meter{
+  width:100%;
+  height:26px;
+  background:#eee;
+  border-radius:999px;
+  overflow:hidden;
+  margin:18px 0;
+  box-shadow:inset 0 3px 6px rgba(0,0,0,.2);
+}
+
+.fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(135deg,#ff69b4,#ff1493);
+  border-radius:999px;
+  animation:fillLove 3s forwards infinite alternate;
+}
+
+@keyframes fillLove{
+  from{width:85%}
+  to{width:100%}
+}
+
+p{
+  font-size:16px;
+  color:#444;
+  margin-bottom:10px;
+}
+
+h2{
+  color:#ff1493;
+  font-size:22px;
+  margin-bottom:18px;
+}
+
+/* music button */
+.music-btn{
+  padding:12px 26px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ff69b4,#ff1493);
+  color:white;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(255,20,147,.35);
+  transition:.3s;
+}
+
+.music-btn:hover{
+  transform:scale(1.05);
+}
+
+/* mobile */
+@media (max-width:480px){
+
+  h1{font-size:26px;}
+  h2{font-size:18px;}
+  p{font-size:14px;}
+
+  .box{
+    padding:30px 22px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-<audio autoplay loop src="music.mp3"></audio>
+<div class="hearts">❤️ 💖 💕 💞 💗 💓</div>
 
 <div class="box">
   <h1>How Much I Love You 💖</h1>
@@ -17,7 +142,22 @@
 
   <p>Love Level: ∞ Infinite</p>
   <h2>You are my forever 💍</h2>
+
+  <button class="music-btn" onclick="playMusic()">Play Our Song 🎵</button>
 </div>
+
+<!-- AUDIO -->
+<audio id="bgMusic" src="music.mp3" preload="auto"></audio>
+
+<script>
+function playMusic(){
+  const audio = document.getElementById("bgMusic");
+  audio.currentTime = 0;
+  audio.play().catch(()=>{
+    alert("Tap once to allow sound ❤️");
+  });
+}
+</script>
 
 </body>
 </html>
